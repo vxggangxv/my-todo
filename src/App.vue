@@ -24,12 +24,15 @@ export default {
 }
 </script>
 
-<style>
-@import url("https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.css");
-@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR');
+<style lang="scss">
+$primary-color: #38424E;
+$fg-blue:#2133ED;
+$fg-pink: #FF436B;
 
 body {
   font-family: "Noto Sans KR", Arial, Helvetica, sans-serif;
+  color: $primary-color;
+  background-image: linear-gradient(to bottom , #FEFEFE, #F3F3FB);
 }
 a, a:hover, a:active, a:focus {
   text-decoration: none;
@@ -44,5 +47,14 @@ button {
 }
 .shadow {
   box-shadow: 5px 10px 10px rgba(0,0,0, 0.03);
+}
+.primary-color {
+  color: #38424E;
+}
+.c-blue {
+  color: #2133ED;
+}
+.c-pink {
+  color: #FF436B;
 }
 </style>
