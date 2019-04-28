@@ -21,10 +21,10 @@ header {
 }
 h1 {
     color: #2f3b52;
-    font-weight: 700;
-    font-size: 20px;
+    font-weight: 800;
+    font-size: 34px;
     line-height: 1.1;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 .cmt {
     font-size: 13px;
