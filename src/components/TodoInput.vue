@@ -1,16 +1,48 @@
 <template>
     <div class="inputBox shadow">
-        <input type="text">
-        <span class="addContainer">
+        <input class="inp todo" type="text" v-model="newTodoItem" @keyup.enter="addTodo">
+        <span class="addContainer" v-on:click="addTodo">
             <i class="addBtn fas fa-plus"></i>
         </span>
 
+        <Modal v-if="showModal" @close="showModal = false">
+          <h3 slot="header">
+            경고
+            <i class="closeModalBtn fa fa-times" aria-hidden="true" @click="showModal = false">
+            </i>
+          </h3>
+          <p slot="body">할 일을 입력하세요.</p>
+        </Modal>
     </div>
 </template>
 
 <script>
-export default {
+import Modal from './common/Modal.vue'
 
+export default {
+  data() {
+    return {
+      newTodoItem: '',
+      showModal: false
+    }
+  },
+  methods: {
+    addTodo() {
+      if (this.newTodoItem !== '') {
+        const item = this.newTodoItem.trim();
+        this.$store.commit('addOneItem', item);
+        this.clearInput();
+      } else {
+        this.showModal = !this.showModal;
+      }
+    },
+    clearInput() {
+      this.newTodoItem = '';
+    }
+  },
+  components: {
+    Modal
+  }
 }
 </script>
 
@@ -25,9 +57,10 @@ input:focus {
   line-height: 50px;
   border-radius: 5px;
 }
-.inputBox input {
+.inputBox .inp.todo {
   border-style: none;
   font-size: 0.9rem;
+  padding-left: 10px;
 }
 .addContainer {
   float: right;
