@@ -15,18 +15,22 @@ export default {
 header {
     width: 100%;
     padding: 2.8rem 10px 1.5rem 50px;
-    line-height: 1.5;
-    font-family: "Roboto", "Ubuntu", sans-serif;
+    font-family: "Roboto", sans-serif;
+    font-family: "Open Sans", sans-serif;
+    /* font-family: "Noto Sans KR", sans-serif; */
     /* background: #000; */
 }
 h1 {
     color: #2f3b52;
-    font-weight: 800;
-    font-size: 34px;
-    line-height: 1.1;
-    letter-spacing: 2px;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: 1px;
 }
 .cmt {
+    font-weight: 400;
     font-size: 13px;
+    margin-top: 10px;
+    padding-left: 2px;
 }
 </style>

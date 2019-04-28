@@ -14,11 +14,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 input:focus {
   outline: none;
 }
 .inputBox {
+  margin: 0 50px;
   background: white;
   height: 50px;
   line-height: 50px;
@@ -34,11 +35,13 @@ input:focus {
   display: block;
   width: 3rem;
   border-radius: 0 5px 5px 0;
+  text-align: center;
 }
 .addBtn {
   color: white;
   vertical-align: middle;
 }
+// 모달용
 .closeModalBtn {
   color: #42b983;
 }

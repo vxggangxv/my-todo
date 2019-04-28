@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="sec list">
         <!-- <transition-group name="list" tag="ul"> -->
         <ul>
             <li class="shadow">
@@ -20,7 +20,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.sec.list {
+  margin: 0 50px;
+}
+
 ul {
   list-style-type: none;
   padding-left: 0px;
