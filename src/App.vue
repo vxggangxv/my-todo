@@ -40,7 +40,7 @@ a, a:hover, a:active, a:focus {
 }
 input {
   border-style: groove;
-  width: 200px;
+  // width: 200px;
 }
 button {
   border-style: groove;

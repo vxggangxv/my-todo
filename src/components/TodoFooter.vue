@@ -1,12 +1,16 @@
 <template>
     <div class="clearAllContainer">
-        <span class="clearAllBtn">Clear All</span>
+        <span class="clearAllBtn" @click="clearTodo">Clear All</span>
     </div>
 </template>
 
 <script>
 export default {
-
+  methods: {
+    clearTodo() {
+      localStorage.clear();
+    }
+  }
 }
 </script>
 
@@ -17,6 +21,7 @@ export default {
   height: 50px;
   line-height: 50px;
   border-radius: 5px;
+  cursor: pointer;
 }
 .clearAllBtn {
   background: rgb(40,37,214);

@@ -12,16 +12,16 @@
       </div>
       <transition-group name="list" tag="ul" class="listPost">
         <!-- <ul class="listPost"> -->
-        <li v-for="(todoItem, index) in this.getTodoItems" class="post" v-bind:key="todoItem.item">
+        <li class="post" v-for="(todoItem, index) in todoItems" v-bind:key="todoItem">
           <i class="fas fa-caret-right"></i>
           <!-- <i class="checkBtn fas fa-checkBtn"></i> -->
           <!-- <span class="textCompleted"></span> -->
           <div class="post-title">
             <p class="txt">
-              Morning Jogging
+              {{ todoItem }}
             </p>
           </div>
-          <span class="removeBtn">
+          <span class="removeBtn" @click="removeTodo(todoItem, index)">
             <i class="removeBtn fas fa-trash-alt"></i>
           </span>
         </li>
@@ -54,21 +54,28 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
-
-
   export default {
-    computed: {
-      ...mapGetters({
-        getTodoItems: 'getTodoItems'
-      })
+    data() {
+      return {
+        todoItems: []
+      }
     },
     methods: {
-      ...mapMutations({
-        removeOneItem: 'removeOneItem',
-        toggleOneItem: 'toggleOneItem'
-      })
+      removeTodo(todoItem, index) {
+        localStorage.removeItem(todoItem);
+        this.todoItems.splice(index, 1);
+        console.log(todoItem, index);
+      }
     },
+    created() {
+      if (localStorage.length > 0) {
+        for (var i = 0; i < localStorage.length; i++) {
+          if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
+            this.todoItems.push(localStorage.key(i));
+          }
+        }
+      }
+    }
   }
 </script>
 
@@ -103,63 +110,65 @@
           margin-right: 5px;
         }
       }
-    }
 
-    ul.listPost {
-      margin-top: 40px;
-      list-style-type: none;
-    }
+      ul.listPost {
+        margin-top: 40px;
+        list-style-type: none;
 
-    li.post {
-      display: flex;
-      align-items: center;
-      align-items: flex-start;
-      margin: 1.5rem 0;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #f0f0f0;
-      // padding: 10px 0;
-      // border-radius: 10px;
-      // border: 1px solid #f0f0f0;
-      // box-shadow: 0px 10px 10px rgba(0,0,0, 0.03);
+        li.post {
+          display: flex;
+          align-items: center;
+          align-items: flex-start;
+          margin: 1.5rem 0;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #f0f0f0;
+          // padding: 10px 0;
+          // border-radius: 10px;
+          // border: 1px solid #f0f0f0;
+          // box-shadow: 0px 10px 10px rgba(0,0,0, 0.03);
 
-      // min-height: 50px;
-      // height: 50px;
-      // line-height: 50px;
-      // padding: 0 0.9rem;
-      // background: yellow;
-      .fas {
-        position: relative;
-      }
+          // min-height: 50px;
+          // height: 50px;
+          // line-height: 50px;
+          // padding: 0 0.9rem;
+          // background: yellow;
+          .fas {
+            position: relative;
+          }
 
-      .fa-caret-right {
-        font-size: 20px;
-        color: rgb(255, 67, 117);
-        top: -1px;
-        padding-right: 10px;
-      }
+          .fa-caret-right {
+            font-size: 20px;
+            color: rgb(255, 67, 117);
+            top: -1px;
+            padding-right: 10px;
+          }
 
-      .ic-caret-right {
-        position: relative;
-        font-size: 12px;
-        color: rgb(255, 67, 117);
-        top: 2px;
-        padding-right: 10px;
-      }
+          .ic-caret-right {
+            position: relative;
+            font-size: 12px;
+            color: rgb(255, 67, 117);
+            top: 2px;
+            padding-right: 10px;
+          }
 
-      .post-title {
-        .txt {}
+          .post-title {
+            .txt {}
 
-        .date {
-          font-family: "Roboto", sans-serif;
-          margin-top: 10px;
-          color: #ccc;
-          font-size: 12px;
+            .date {
+              font-family: "Roboto", sans-serif;
+              margin-top: 10px;
+              color: #ccc;
+              font-size: 12px;
+            }
+          }
+
+          .fa-trash-alt {
+            top: 1px;
+          }
         }
+
       }
 
-      .fa-trash-alt {
-        top: 1px;
-      }
     }
   }
 
