@@ -14,6 +14,7 @@ export default {
 <style scoped>
 header {
     width: 100%;
+    box-sizing: border-box;
     padding: 2.8rem 10px 1.5rem 50px;
     font-family: "Roboto", sans-serif;
     font-family: "Open Sans", sans-serif;
