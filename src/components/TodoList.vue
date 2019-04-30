@@ -1,7 +1,8 @@
 <template>
   <section class="sec listContainer">
     <div class="row-arr">
-      <i class="fas fa-caret-down"></i>
+      <!-- <i class="fas fa-caret-down"></i> -->
+      <i class="fas fa-chevron-down"></i>
     </div>
 
     <div class="listDay shadow">
