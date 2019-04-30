@@ -29,4 +29,4 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### deploy
-https://jolly-darwin-1fb40c.netlify.com/ 
+<a href="https://jolly-darwin-1fb40c.netlify.com/" target="_blank">배포 주소(beta)</a>
