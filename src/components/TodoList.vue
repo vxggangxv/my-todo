@@ -1,8 +1,8 @@
 <template>
   <section class="sec listContainer">
     <div class="row-arr">
-      <!-- <i class="fas fa-caret-down"></i> -->
-      <i class="fas fa-chevron-down"></i>
+      <i class="fas fa-caret-down"></i>
+      <!-- <i class="fas fa-chevron-down"></i> -->
     </div>
 
     <div class="listDay shadow">
@@ -13,42 +13,18 @@
       </div>
       <transition-group name="list" tag="ul" class="listPost">
         <!-- <ul class="listPost"> -->
-        <li class="post" v-for="(todoItem, index) in todoItems" v-bind:key="todoItem">
-          <i class="fas fa-caret-right"></i>
-          <!-- <i class="checkBtn fas fa-checkBtn"></i> -->
-          <!-- <span class="textCompleted"></span> -->
+        <li class="post" v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item">
           <div class="post-title">
-            <p class="txt">
-              {{ todoItem }}
-            </p>
+            <i class="checkBtn fas fa-check" :class="{checkBtnCompleted: todoItem.completed}" @click="toggleComplete(todoItem, index)"></i>
+            <!-- <i class="checkBtn fas fa-caret-right" :class="{checkBtnCompleted: todoItem.completed}" @click="toggleComplete(todoItem, index)"></i> -->
+            <span class="txt" :class="{txtCompleted: todoItem.completed}">
+              {{ todoItem.item }}
+            </span>
           </div>
           <span class="removeBtn" @click="removeTodo(todoItem, index)">
             <i class="removeBtn fas fa-trash-alt"></i>
           </span>
         </li>
-        <!-- <li class="post">
-          <i class="fas fa-caret-right"></i>
-          <div class="post-title">
-            <p class="txt">
-              Study Group
-            </p>
-          </div>
-          <span class="removeBtn">
-            <i class="removeBtn fas fa-trash-alt"></i>
-          </span>
-        </li>
-        <li class="post">
-          <i class="fas fa-caret-right"></i>
-          <div class="post-title">
-            <p class="txt">
-              Afternoon Meeting
-            </p>
-          </div>
-          <span class="removeBtn">
-            <i class="removeBtn fas fa-trash-alt"></i>
-          </span>
-        </li> -->
-        <!-- </ul> -->
       </transition-group>
     </div>
   </section>
@@ -58,25 +34,37 @@
   export default {
     data() {
       return {
-        todoItems: []
+        todoItems: [],
       }
     },
     methods: {
       removeTodo(todoItem, index) {
-        localStorage.removeItem(todoItem);
-        this.todoItems.splice(index, 1);
-        console.log(todoItem, index);
+        // console.log(index);
+        this.$store.commit('removeOneItem', {todoItem, index});
+        // localStorage.removeItem(todoItem);
+        // this.todoItems.splice(index, 1);
+        // console.log(todoItem, index);
+      },
+      toggleComplete(todoItem, index) {
+        this.$store.commit('toggleOneItem', {todoItem, index});
+        // todoItem.completed = !todoItem.completed;
+        // localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
       }
     },
-    created() {
-      if (localStorage.length > 0) {
-        for (var i = 0; i < localStorage.length; i++) {
-          if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-            this.todoItems.push(localStorage.key(i));
-          }
-        }
+    computed: {
+      storedTodoItems() {
+        return this.$store.getters.getTodoItems;
       }
     }
+    // created() {
+    //   if (localStorage.length > 0) {
+    //     for (var i = 0; i < localStorage.length; i++) {
+    //       if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
+    //         this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+    //       }
+    //     }
+    //   }
+    // }
   }
 </script>
 
@@ -100,15 +88,19 @@
       background: white;
       border-radius: 5px;
       text-align: left;
-
+      .far, .fas {
+        position: relative;
+      }
       .todo-txt {
         font-family: "Open Sans", sans-serif;
         font-weight: 600;
         text-align: center;
 
-        .far {
-          color: rgb(226, 232, 244);
-          margin-right: 5px;
+        .far.fa-clipboard {
+          top: -1px;
+          // color: #d2def5;
+          color: $fg-green;
+          margin-right: 2px;
         }
       }
 
@@ -133,66 +125,60 @@
           // line-height: 50px;
           // padding: 0 0.9rem;
           // background: yellow;
-          .fas {
-            position: relative;
+          .fa-check {
+            top: -1px;
+            font-size: 14px;
           }
-
           .fa-caret-right {
             font-size: 20px;
-            color: rgb(255, 67, 117);
-            top: -1px;
-            padding-right: 10px;
+            top: 1px;
           }
 
           .ic-caret-right {
             position: relative;
             font-size: 12px;
-            color: rgb(255, 67, 117);
             top: 2px;
             padding-right: 10px;
           }
 
           .post-title {
-            .txt {}
-
+            .checkBtn {
+              // line-height: 45px;
+              // color: #62acde;
+              color: $fg-pink;
+              margin-right: 5px;
+              &.checkBtnCompleted {
+                color: #b3adad;
+              }
+            }
+            .txt {
+              &.txtCompleted {
+                text-decoration: line-through;
+                color: #b3adad;
+              }
+            }
             .date {
               font-family: "Roboto", sans-serif;
               margin-top: 10px;
               color: #ccc;
               font-size: 12px;
             }
+
+          }
+          .removeBtn {
+            margin-left: auto;
+            color: #de4343;
+            .fa-trash-alt {
+              top: 1px;
+            }
           }
 
-          .fa-trash-alt {
-            top: 1px;
-          }
         }
 
       }
 
     }
   }
-
-  .checkBtn {
-    line-height: 45px;
-    color: #62acde;
-    margin-right: 5px;
-  }
-
-  .checkBtnCompleted {
-    color: #b3adad;
-  }
-
-  .textCompleted {
-    text-decoration: line-through;
-    color: #b3adad;
-  }
-
-  .removeBtn {
-    margin-left: auto;
-    color: #de4343;
-  }
-
   /* transition css */
   .list-enter-active,
   .list-leave-active {

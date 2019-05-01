@@ -49,7 +49,6 @@
   transition: all .3s ease;
   font-family: Helvetica, Arial, sans-serif;
 }
-
 .modal-header h3 {
   margin-top: 0;
   color: #42b983;
@@ -61,6 +60,15 @@
 
 .modal-default-button {
   float: right;
+}
+
+/* override */
+.modal-header,
+.modal-body {
+  text-align: center;
+}
+.closeModalBtn {
+  cursor: pointer;
 }
 
 /*

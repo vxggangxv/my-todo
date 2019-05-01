@@ -25,10 +25,6 @@ export default {
 </script>
 
 <style lang="scss">
-$primary-color: #38424E;
-$fg-blue:#2133ED;
-$fg-pink: #FF436B;
-
 body {
   font-family: "Noto Sans KR", Arial, Helvetica, sans-serif;
   color: $primary-color;
@@ -51,10 +47,13 @@ button {
 .primary-color {
   color: #38424E;
 }
-.c-blue {
-  color: #2133ED;
+.fg-blue {
+  color: #2133ED !important;
 }
-.c-pink {
-  color: #FF436B;
+.fg-pink {
+  color: #FF436B !important;
+}
+.fg-green {
+  color: #41B883 !important;
 }
 </style>
