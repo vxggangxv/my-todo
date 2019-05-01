@@ -28,7 +28,6 @@ export default {
 body {
   font-family: "Noto Sans KR", Arial, Helvetica, sans-serif;
   color: $primary-color;
-  background-image: linear-gradient(to bottom , #FEFEFE, #F3F3FB);
 }
 a, a:hover, a:active, a:focus {
   text-decoration: none;
@@ -55,5 +54,13 @@ button {
 }
 .fg-green {
   color: #41B883 !important;
+}
+#app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom , #FEFEFE, #F3F3FB);
 }
 </style>

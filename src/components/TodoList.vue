@@ -97,9 +97,10 @@
         text-align: center;
 
         .far.fa-clipboard {
+          font-size: 15px;
           top: -1px;
-          // color: #d2def5;
-          color: $fg-green;
+          color: #ccdbf7;
+          // color: $fg-green;
           margin-right: 2px;
         }
       }

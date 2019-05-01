@@ -1,13 +1,17 @@
 <template>
     <header>
         <h1>Hello<br/>Harry!</h1>
-        <p class="cmt">You have <span class="fg-blue">3 new task</span> today</p>
+        <p class="cmt">You have <span class="fg-blue">{{ this.storedTodoItems.length }} new task</span> today</p>
     </header>
 </template>
 
 <script>
 export default {
-
+    computed: {
+        storedTodoItems() {
+            return this.$store.getters.getTodoItems;
+        }
+    },
 }
 </script>
 
