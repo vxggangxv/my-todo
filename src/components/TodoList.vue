@@ -32,11 +32,11 @@
 
 <script>
   export default {
-    data() {
-      return {
-        todoItems: [],
-      }
-    },
+    // data() {
+    //   return {
+    //     todoItems: [],
+    //   }
+    // },
     methods: {
       removeTodo(todoItem, index) {
         // console.log(index);
