@@ -27,11 +27,11 @@
 </template>
 
 <script>
-  import AlertModal from './common/AlertModal.vue';
+  import Modal from './common/Modal.vue';
 
   export default {
     components: {
-      Modal: AlertModal
+      Modal
     },
     data() {
       return {
@@ -42,8 +42,8 @@
     },
     methods: {
       addTodo() {
-        console.log(this.newTodoItem);
-        console.log(this.$store.state.todoItems.length);
+        // console.log(this.newTodoItem);
+        // console.log(this.$store.state.todoItems.length);
         if (this.newTodoItem !== "") {
           const item = this.newTodoItem.trim();
           // 중복 체크
