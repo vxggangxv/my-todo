@@ -27,11 +27,11 @@
 </template>
 
 <script>
-  import Modal from './common/Modal.vue';
+  import AlertModal from './common/AlertModal.vue';
 
   export default {
     components: {
-      Modal
+      Modal: AlertModal
     },
     data() {
       return {
