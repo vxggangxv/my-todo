@@ -8,20 +8,22 @@
 
     <Modal v-if="showModal" @close="showModal = false">
       <h3 slot="header">
-        경고
+        알림
         <i class="closeModalBtn fa fa-times" aria-hidden="true" @click="showModal = false">
         </i>
       </h3>
       <p slot="body">할 일을 입력하세요.</p>
+      <div slot="footer"></div>
     </Modal>
 
     <Modal v-if="dupliModal" @close="dupliModal = false">
       <h3 slot="header">
-        경고
+        알림
         <i class="closeModalBtn fa fa-times" aria-hidden="true" @click="dupliModal = false">
         </i>
       </h3>
       <p slot="body">중복된 메모가 있습니다.</p>
+      <div slot="footer"></div>
     </Modal>
   </div>
 </template>
@@ -114,8 +116,4 @@
     vertical-align: middle;
   }
 
-  // 모달용
-  .closeModalBtn {
-    color: #42b983;
-  }
 </style>

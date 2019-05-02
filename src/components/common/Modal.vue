@@ -15,6 +15,15 @@
               default body
             </slot>
           </div>
+
+          <div class="modal-footer">
+            <slot name="footer">
+              default footer
+              <button class="modal-default-button" @click="$emit('close')">
+                OK
+              </button>
+            </slot>
+          </div>
         </div>
       </div>
     </div>
@@ -54,21 +63,42 @@
   color: #42b983;
 }
 
+
 .modal-body {
   margin: 20px 0;
 }
 
-.modal-default-button {
-  float: right;
-}
 
 /* override */
+.modal-container {
+  line-height: 1;
+}
 .modal-header,
-.modal-body {
+.modal-body,
+.modal-footer {
   text-align: center;
+  padding: 10px 0;
 }
 .closeModalBtn {
+  float: right;
+  color: #42b983;
   cursor: pointer;
+}
+.modal-default-button {
+  min-width: 100px;
+  height: 30px;
+  line-height: 25px;
+  padding: 0 15px;
+  background-color: #42b983;
+  border: none;
+  color: #fff;
+  text-align: center;
+}
+.modal-default-button + .modal-default-button {
+  margin-left: 10px;
+}
+.btn-gray {
+  background-color: #9f9f9f;
 }
 
 /*

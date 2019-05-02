@@ -27,20 +27,61 @@
         </li>
       </transition-group>
     </div>
+
+    <Modal v-if="showModal" @close="showModal = false">
+      <h3 slot="header">
+        알림
+        <i class="closeModalBtn fa fa-times" aria-hidden="true" @click="showModal = false">
+        </i>
+      </h3>
+      <p slot="body">정말 삭제하시겠습니까?</p>
+      
+      <div slot="footer">
+        <input ref="modalBtn" type="button" class="modal-default-button" @click="showModal = false" value="OK">
+        <!-- <button ref="modalBtn" type="button" class="modal-default-button" @click="showModal = false">
+          OK
+        </button> -->
+        <button type="button" class="modal-default-button btn-gray" @click="showModal = false">
+          CANCEL
+        </button>
+      </div>
+      
+    </Modal>    
   </section>
 </template>
 
 <script>
+import Modal from './common/Modal.vue';
+
   export default {
-    // data() {
-    //   return {
-    //     todoItems: [],
-    //   }
-    // },
+    components: {
+      Modal
+    },
+    data() {
+      return {
+        showModal: false,
+      // todoItems: [],
+      }
+    },
     methods: {
       removeTodo(todoItem, index) {
         // console.log(index);
-        this.$store.commit('removeOneItem', {todoItem, index});
+        // alert('hi');
+        // this.showModal = true;
+        var con_result = confirm("정말로 삭제하시겠습니까?");
+        if (con_result) {
+          this.$store.commit('removeOneItem', {todoItem, index});
+        }
+        // this.$refs.modalBtn.click(function() {
+        //   alert('hi');
+        // });
+        // console.log(this.$refs);
+        // console.log(this.$refs.modalBtn.value);
+        // console.log(Modal.value);
+        // if(this.$refs.modalOk) {
+        //   this.$store.commit('removeOneItem', {todoItem, index});
+        // }
+        // this.$store.commit('removeOneItem', {todoItem, index});
         // localStorage.removeItem(todoItem);
         // this.todoItems.splice(index, 1);
         // console.log(todoItem, index);
