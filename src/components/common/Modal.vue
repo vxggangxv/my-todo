@@ -85,7 +85,7 @@
   cursor: pointer;
 }
 .modal-default-button {
-  min-width: 100px;
+  min-width: 85px;
   height: 30px;
   line-height: 25px;
   padding: 0 15px;

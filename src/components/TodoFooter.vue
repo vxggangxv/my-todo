@@ -8,7 +8,10 @@
 export default {
   methods: {
     clearTodo() {
-      this.$store.commit('clearAllItems');
+      var cfm = confirm("정말로 삭제하시겠습니까?");
+        if (cfm) {
+          this.$store.commit('clearAllItems');
+        }
       // localStorage.clear();
       console.log(this.$store.state.todoItems.length);
     }
