@@ -79,7 +79,7 @@
 
   .inputBox {
     position: relative;
-    margin: 0 50px;
+    margin: 0 40px;
     padding-right: 55px;
     background: white;
     height: 50px;

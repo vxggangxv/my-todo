@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="bg-body"></div>
     <todo-header></todo-header>
     <todo-input></todo-input>
     <todo-list></todo-list>
@@ -19,8 +20,7 @@ export default {
     TodoInput,
     TodoList,
     TodoFooter
-  }
-
+  },
 }
 </script>
 
@@ -55,10 +55,11 @@ button {
 .fg-green {
   color: #41B883 !important;
 }
-#app {
-  position: absolute;
+.bg-body {
+  position: fixed;
   top: 0;
   left: 0;
+  z-index: -1;
   width: 100%;
   height: 100%;
   background-image: linear-gradient(to bottom , #FEFEFE, #F3F3FB);

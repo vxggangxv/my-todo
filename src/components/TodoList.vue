@@ -15,7 +15,8 @@
         <!-- <ul class="listPost"> -->
         <li class="post" v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item">
           <div class="post-title">
-            <i class="checkBtn fas fa-check" :class="{checkBtnCompleted: todoItem.completed}" @click="toggleComplete(todoItem, index)"></i>
+            <i class="checkBtn fas fa-check" :class="{checkBtnCompleted: todoItem.completed}"
+              @click="toggleComplete(todoItem, index)"></i>
             <!-- <i class="checkBtn fas fa-caret-right" :class="{checkBtnCompleted: todoItem.completed}" @click="toggleComplete(todoItem, index)"></i> -->
             <span class="txt" :class="{txtCompleted: todoItem.completed}">
               {{ todoItem.item }}
@@ -27,45 +28,69 @@
         </li>
       </transition-group>
     </div>
+
+    <Modal v-if="showModal" @close="showModal = false">
+      <h3 slot="header">
+        알림
+        <i class="closeModalBtn fa fa-times" aria-hidden="true" @click="showModal = false">
+        </i>
+      </h3>
+      <p slot="body">정말 삭제하시겠습니까?</p>
+      <div slot="footer">
+        <button ref="modalOk" class="modal-default-button" @click="showModal = false">OK</button>
+        <button class="modal-default-button" @click="showModal = false">CANCEL</button>
+      </div>
+    </Modal>
   </section>
 </template>
 
 <script>
-import Modal from './common/Modal.vue';
+  import Modal from './common/Modal.vue';
 
   export default {
-    components: {
-      Modal
-    },
     data() {
       return {
         showModal: false,
-        modalConfirm: false,
-      // todoItems: [],
-      }
-    },
-    methods: {
-      removeTodo(todoItem, index) {
-        var cfm = confirm("정말로 삭제하시겠습니까?");
-        if (cfm) {
-          this.$store.commit('removeOneItem', {todoItem, index});
-        }
-        // this.$store.commit('removeOneItem', {todoItem, index});
-        // localStorage.removeItem(todoItem);
-        // this.todoItems.splice(index, 1);
-        // console.log(todoItem, index);
-      },
-      toggleComplete(todoItem, index) {
-        this.$store.commit('toggleOneItem', {todoItem, index});
-        // todoItem.completed = !todoItem.completed;
-        // localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+        // todoItems: [],
       }
     },
     computed: {
       storedTodoItems() {
         return this.$store.getters.getTodoItems;
       }
-    }
+    },
+    methods: {
+      removeTodo(todoItem, index) {
+        this.showModal = true;
+        let thisStore = this.$store;
+        this.$nextTick(function () {
+          this.$refs.modalOk.addEventListener('click', function () {
+            // console.log(thisStore);
+            thisStore.commit('removeOneItem', {todoItem, index});
+          });
+        });
+        // var cfm = confirm("정말로 삭제하시겠습니까?");
+        // if (cfm) {
+        //   this.$store.commit('removeOneItem', {todoItem, index});
+        // }
+        // this.$store.commit('removeOneItem', {todoItem, index});
+        // localStorage.removeItem(todoItem);
+        // this.todoItems.splice(index, 1);
+        // console.log(todoItem, index);
+      },
+      toggleComplete(todoItem, index) {
+        this.$store.commit('toggleOneItem', {
+          todoItem,
+          index
+        });
+        // todoItem.completed = !todoItem.completed;
+        // localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+        // console.log(document.getElementsByClassName('listContainer'));
+      },
+    },
+    components: {
+      Modal
+    },
     // created() {
     //   if (localStorage.length > 0) {
     //     for (var i = 0; i < localStorage.length; i++) {
@@ -80,7 +105,7 @@ import Modal from './common/Modal.vue';
 
 <style lang="scss" scoped>
   .sec.listContainer {
-    margin: 0 50px;
+    margin: 0 40px;
 
     .row-arr {
       margin: 10px auto;
@@ -98,9 +123,12 @@ import Modal from './common/Modal.vue';
       background: white;
       border-radius: 5px;
       text-align: left;
-      .far, .fas {
+
+      .far,
+      .fas {
         position: relative;
       }
+
       .todo-txt {
         font-family: "Open Sans", sans-serif;
         font-weight: 600;
@@ -140,6 +168,7 @@ import Modal from './common/Modal.vue';
             top: -1px;
             font-size: 14px;
           }
+
           .fa-caret-right {
             font-size: 20px;
             top: 1px;
@@ -158,16 +187,19 @@ import Modal from './common/Modal.vue';
               // color: #62acde;
               color: $fg-pink;
               margin-right: 5px;
+
               &.checkBtnCompleted {
                 color: #b3adad;
               }
             }
+
             .txt {
               &.txtCompleted {
                 text-decoration: line-through;
                 color: #b3adad;
               }
             }
+
             .date {
               font-family: "Roboto", sans-serif;
               margin-top: 10px;
@@ -176,9 +208,11 @@ import Modal from './common/Modal.vue';
             }
 
           }
+
           .removeBtn {
             margin-left: auto;
             color: #de4343;
+
             .fa-trash-alt {
               top: 1px;
             }
@@ -190,6 +224,7 @@ import Modal from './common/Modal.vue';
 
     }
   }
+
   /* transition css */
   .list-enter-active,
   .list-leave-active {

@@ -19,7 +19,7 @@ export default {
 header {
     width: 100%;
     box-sizing: border-box;
-    padding: 2.8rem 10px 1.5rem 50px;
+    padding: 2.8rem 10px 1.5rem 40px;
     font-family: "Roboto", sans-serif;
     font-family: "Open Sans", sans-serif;
     /* font-family: "Noto Sans KR", sans-serif; */
