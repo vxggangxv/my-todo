@@ -72,6 +72,7 @@
 /* override */
 .modal-container {
   line-height: 1;
+  font-size: 14px;
 }
 .modal-header,
 .modal-body,

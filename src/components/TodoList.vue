@@ -14,14 +14,16 @@
       <transition-group name="list" tag="ul" class="listPost">
         <!-- <ul class="listPost"> -->
         <li class="post" v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item">
-          <div class="post-title">
-            <i class="checkBtn fas fa-check" :class="{checkBtnCompleted: todoItem.completed}"
-              @click="toggleComplete(todoItem, index)"></i>
-            <!-- <i class="checkBtn fas fa-caret-right" :class="{checkBtnCompleted: todoItem.completed}" @click="toggleComplete(todoItem, index)"></i> -->
-            <span class="txt" :class="{txtCompleted: todoItem.completed}">
-              {{ todoItem.item }}
-            </span>
-          </div>
+
+          <i class="checkBtn fas fa-check" :class="{checkBtnCompleted: todoItem.completed}"
+            @click="toggleComplete(todoItem, index)"></i>
+          <!-- <i class="checkBtn fas fa-caret-right" :class="{checkBtnCompleted: todoItem.completed}" @click="toggleComplete(todoItem, index)"></i> -->
+          <span class="post-txt" :class="{txtCompleted: todoItem.completed}">
+            {{ todoItem.item }}
+            <br>
+            <!-- <span class="time">14 : 00 am</span> -->
+          </span>
+
           <span class="removeBtn" @click="removeTodo(todoItem, index)">
             <i class="removeBtn fas fa-trash-alt"></i>
           </span>
@@ -66,7 +68,10 @@
         this.$nextTick(function () {
           this.$refs.modalOk.addEventListener('click', function () {
             // console.log(thisStore);
-            thisStore.commit('removeOneItem', {todoItem, index});
+            thisStore.commit('removeOneItem', {
+              todoItem,
+              index
+            });
           });
         });
         // var cfm = confirm("정말로 삭제하시겠습니까?");
@@ -165,7 +170,7 @@
           // padding: 0 0.9rem;
           // background: yellow;
           .fa-check {
-            top: -1px;
+            top: 1px;
             font-size: 14px;
           }
 
@@ -181,33 +186,34 @@
             padding-right: 10px;
           }
 
-          .post-title {
-            .checkBtn {
-              // line-height: 45px;
-              // color: #62acde;
-              color: $fg-pink;
-              margin-right: 5px;
+          .checkBtn {
+            // line-height: 45px;
+            // color: #62acde;
+            color: $fg-pink;
+            margin-right: 5px;
 
-              &.checkBtnCompleted {
-                color: #b3adad;
-              }
+            &.checkBtnCompleted {
+              color: #b3adad;
             }
+          }
 
-            .txt {
-              &.txtCompleted {
-                text-decoration: line-through;
-                color: #b3adad;
-              }
+          .post-txt {
+            &.txtCompleted {
+              text-decoration: line-through;
+              color: #b3adad;
             }
-
-            .date {
-              font-family: "Roboto", sans-serif;
-              margin-top: 10px;
-              color: #ccc;
+            .time {
               font-size: 12px;
             }
-
           }
+
+          .date {
+            font-family: "Roboto", sans-serif;
+            margin-top: 10px;
+            color: #ccc;
+            font-size: 12px;
+          }
+
 
           .removeBtn {
             margin-left: auto;
