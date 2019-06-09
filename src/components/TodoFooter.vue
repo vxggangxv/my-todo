@@ -28,14 +28,20 @@ import Modal from './common/Modal.vue';
     },
     methods: {
       clearTodo() {
-        this.showModal = true;
-        let thisStore = this.$store;
-        this.$nextTick(function () {
-          this.$refs.modalOk.addEventListener('click', function () {
-            // console.log(thisStore);
-            thisStore.commit('clearAllItems');
+        // console.log(localStorage.length)
+        if ( localStorage.length > 0 ) {
+          this.showModal = true;
+          let thisStore = this.$store;
+          this.$nextTick(function () {
+            this.$refs.modalOk.addEventListener('click', function () {
+              // console.log(thisStore);
+              thisStore.commit('clearAllItems');
+            });
           });
-        });
+        } else {
+          alert('삭제 할 내용이 없습니다')
+        }
+        
         // var cfm = confirm("정말로 삭제하시겠습니까?");
         // if (cfm) {
         //   this.$store.commit('clearAllItems');
