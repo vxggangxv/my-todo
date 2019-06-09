@@ -17,15 +17,19 @@
 
           <i class="checkBtn fas fa-check" :class="{checkBtnCompleted: todoItem.completed}"
             @click="toggleComplete(todoItem, index)"></i>
-          <!-- <i class="checkBtn fas fa-caret-right" :class="{checkBtnCompleted: todoItem.completed}" @click="toggleComplete(todoItem, index)"></i> -->
           <span class="post-txt" :class="{txtCompleted: todoItem.completed}">
             {{ todoItem.item }}
             <br>
             <!-- <span class="time">14 : 00 am</span> -->
           </span>
 
-          <span class="removeBtn" @click="removeTodo(todoItem, index)">
-            <i class="removeBtn fas fa-trash-alt"></i>
+          <span class="editBtn">
+            <span class="updateBtn" @click="updateTodo(todoItem, index)">
+              <i class="fas fa-pencil-alt"></i>
+            </span>
+            <span class="removeBtn" @click="removeTodo(todoItem, index)">
+              <i class="fas fa-trash-alt"></i>
+            </span>
           </span>
         </li>
       </transition-group>
@@ -39,8 +43,21 @@
       </h3>
       <p slot="body">정말 삭제하시겠습니까?</p>
       <div slot="footer">
-        <button ref="modalOk" class="modal-default-button" @click="showModal = false">OK</button>
+        <button ref="removeOk" class="modal-default-button" @click="showModal = false">OK</button>
         <button class="modal-default-button" @click="showModal = false">CANCEL</button>
+      </div>
+    </Modal>
+
+    <Modal v-if="updateModal" @close="updateModal = false">
+      <h3 slot="header">
+        수정
+        <i class="closeModalBtn fa fa-times" aria-hidden="true" @click="updateModal = false">
+        </i>
+      </h3>
+      <p slot="body"><input type="text" class="updateTodoInput" ref="updateTodoInput" v-model="updateTodoItem"></p>
+      <div slot="footer">
+        <button ref="updateOk" class="modal-default-button" @click="updateModal = false">OK</button>
+        <button class="modal-default-button" @click="updateModal = false">CANCEL</button>
       </div>
     </Modal>
   </section>
@@ -53,6 +70,8 @@
     data() {
       return {
         showModal: false,
+        updateModal: false,
+        updateTodoItem: '',
         // todoItems: [],
       }
     },
@@ -63,17 +82,21 @@
     },
     methods: {
       removeTodo(todoItem, index) {
-        this.showModal = true;
-        let thisStore = this.$store;
-        this.$nextTick(function () {
-          this.$refs.modalOk.addEventListener('click', function () {
-            // console.log(thisStore);
-            thisStore.commit('removeOneItem', {
-              todoItem,
-              index
-            });
-          });
+        this.$store.commit('removeOneItem', {
+          todoItem,
+          index
         });
+        // this.showModal = true;
+        // let $_this = this;
+        // this.$nextTick(function () {
+        //   this.$refs.removeOk.addEventListener('click', function () {
+        //     $_this.$store.commit('removeOneItem', {
+        //       todoItem,
+        //       index
+        //     });
+        //   });
+        // });
+
         // var cfm = confirm("정말로 삭제하시겠습니까?");
         // if (cfm) {
         //   this.$store.commit('removeOneItem', {todoItem, index});
@@ -82,6 +105,31 @@
         // localStorage.removeItem(todoItem);
         // this.todoItems.splice(index, 1);
         // console.log(todoItem, index);
+      },
+      updateTodo(todoItem, index) {
+          this.updateModal = true;
+          let $_this = this;
+          this.$nextTick(function () {
+            $_this.$refs.updateTodoInput.focus();
+            this.$refs.updateOk.addEventListener('click', function () {
+            const item = $_this.updateTodoItem.trim();
+            if (item !== "") {
+              if (localStorage.getItem(item)) {
+                // console.log('중복');
+                alert('중복된 메모입니다')
+              } else {
+                $_this.$store.commit('updateOneItem', {
+                  todoItem,
+                  index,
+                  item
+                });
+              }
+              $_this.updateTodoItem = '';
+            } else {
+              alert('할 일을 입력하세요')
+            }
+          });
+        });
       },
       toggleComplete(todoItem, index) {
         this.$store.commit('toggleOneItem', {
@@ -170,8 +218,9 @@
           // padding: 0 0.9rem;
           // background: yellow;
           .fa-check {
-            top: 1px;
+            top: 2px;
             font-size: 14px;
+            cursor: pointer;
           }
 
           .fa-caret-right {
@@ -215,12 +264,20 @@
           }
 
 
-          .removeBtn {
+          .editBtn {
             margin-left: auto;
-            color: #de4343;
+            color: $fg-red;
 
-            .fa-trash-alt {
+            .fas {
               top: 1px;
+              margin-left: 8px;
+              cursor: pointer;
+            }
+            span:first-child .fas {
+              margin-left: 0;
+            }
+            .updateBtn .fas {
+              color: $fg-lightblue;
             }
           }
 
@@ -228,6 +285,15 @@
 
       }
 
+    }
+    .updateTodoInput {
+      appearance: none;
+      width: 100%;
+      padding: 5px 0;
+      border: none;
+      border-bottom: 1px solid #ddd;
+      color: #333333;
+      text-align: center;
     }
   }
 

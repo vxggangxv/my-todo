@@ -8,7 +8,7 @@
         <i class="closeModalBtn fa fa-times" aria-hidden="true" @click="showModal = false">
         </i>
       </h3>
-      <p slot="body">정말 삭제하시겠습니까?</p>
+      <p slot="body">모두 삭제하시겠습니까?</p>
       <div slot="footer">
         <button ref="modalOk" class="modal-default-button" @click="showModal = false">OK</button>
         <button class="modal-default-button" @click="showModal = false">CANCEL</button>

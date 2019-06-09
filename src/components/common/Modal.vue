@@ -50,7 +50,7 @@
 
 .modal-container {
   /* width: 300px; */
-  margin: 0px 50px;
+  margin: 0px 40px;
   padding: 10px 30px;
   background-color: #fff;
   border-radius: 2px;
