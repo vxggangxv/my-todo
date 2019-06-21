@@ -51,9 +51,9 @@
 
 .modal-container {
   /* width: 300px; */
-  display: inline-block;
   width: 78%;
   max-width: 295px;
+  margin: 0 auto;
   padding: 10px 30px;
   box-sizing: border-box;
   background-color: #fff;
