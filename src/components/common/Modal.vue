@@ -46,7 +46,6 @@
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
-  text-align: center;
 }
 
 .modal-container {
