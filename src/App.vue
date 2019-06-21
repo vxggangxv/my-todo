@@ -55,6 +55,11 @@ button {
 .fg-green {
   color: #41B883 !important;
 }
+#app {
+  position: relative;
+  max-width: 375px;
+  margin: 0 auto;
+}
 .bg-body {
   position: fixed;
   top: 0;
