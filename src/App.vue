@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import TodoHeader from './components/TodoHeader.vue';
-import TodoInput from './components/TodoInput.vue';
-import TodoList from './components/TodoList.vue';
-import TodoFooter from './components/TodoFooter.vue';
+import TodoHeader from "./components/TodoHeader.vue";
+import TodoInput from "./components/TodoInput.vue";
+import TodoList from "./components/TodoList.vue";
+import TodoFooter from "./components/TodoFooter.vue";
 
 export default {
   components: {
@@ -21,7 +21,10 @@ export default {
     TodoList,
     TodoFooter
   },
-}
+  created() {
+    alert("모바일크기에 최적화되어 있습니다.");
+  }
+};
 </script>
 
 <style lang="scss">
@@ -29,7 +32,10 @@ body {
   font-family: "Noto Sans KR", Arial, Helvetica, sans-serif;
   color: $primary-color;
 }
-a, a:hover, a:active, a:focus {
+a,
+a:hover,
+a:active,
+a:focus {
   text-decoration: none;
   color: inherit;
 }
@@ -41,19 +47,19 @@ button {
   border-style: groove;
 }
 .shadow {
-  box-shadow: 5px 10px 10px rgba(0,0,0, 0.03);
+  box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.07);
 }
 .primary-color {
-  color: #38424E;
+  color: #38424e;
 }
 .fg-blue {
-  color: #2133ED !important;
+  color: #2133ed !important;
 }
 .fg-pink {
-  color: #FF436B !important;
+  color: #ff436b !important;
 }
 .fg-green {
-  color: #41B883 !important;
+  color: #41b883 !important;
 }
 #app {
   position: relative;
@@ -67,6 +73,6 @@ button {
   z-index: -1;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(to bottom , #FEFEFE, #F3F3FB);
+  background-image: linear-gradient(to bottom, #fefefe, #dadaff);
 }
 </style>
